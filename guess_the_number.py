@@ -14,8 +14,11 @@ while repeat == "y":
     while times < 5:
 
         times += 1
-        
-        guessing = int(input("\nWhich number do you think it is?: "))
+        try:
+            guessing = int(input("\nWhich number do you think it is?: "))
+        except ValueError:
+            guessing = 11
+            print("\nError: Invalid input!")
 
         if guessing == random_number:
             print("\nYour guess is TRUE! Congrats!")
