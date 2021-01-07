@@ -3,15 +3,37 @@ import random
 random_number = random.randint(1,10)
 
 print("\n\nWelcome to \"Guess the number?\" Game!")
-print("\nI'm thinking in a number between 1 and 10.")
-print("\nCould you tell me which number is?")
 
 times = 0
 repeat = "y"
 
 while repeat == "y":
 
-    while times < 5:
+    print("\nPlease choose a Game Level:")
+    print("1. Easy.")
+    print("2. Challenging.")
+    print("3. Mastermind.")
+    level = input("\nWich level will you pick?: ")
+
+    if level == "1":
+        try_limit = 5
+        random_number = random.randint(1,10)
+        print("\nI'm thinking in a number between 1 and 10. You have 5 tries!")
+    elif level == "2":
+        try_limit = 5
+        random_number = random.randint(1,20)
+        print("\nI'm thinking in a number between 1 and 20. You have 5 tries!")
+    elif level == "3":
+        try_limit = 4
+        random_number = random.randint(1,30)
+        print("\nI'm thinking in a number between 1 and 30. You have 4 tries!")
+    else:
+        print("\nError: Invalid option. Please try again!")
+        continue
+    
+    #print("\nCould you tell me which number is?")
+
+    while times < try_limit:
 
         times += 1
         try:
@@ -34,7 +56,7 @@ while repeat == "y":
             else:
                 print("\nFail! You're cold! Try again!")
         
-        print("\nYou have {0} tries left! Keep goin'!".format(5-times))
+        print("\nYou have {0} tries left! Keep goin'!".format(try_limit - times))
 
     repeat = input("\nDo you want to play again? [Yes/No]: ")
     repeat = repeat.lower()
