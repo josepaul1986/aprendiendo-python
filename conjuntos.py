@@ -11,16 +11,18 @@ def ver_menu():
     print("3. Diferencia")
     print("4. Diferencia simetrica")
     print("5. Ver menu")
-    print("6. Salir")
+    print("6. Ingresar nuevos conjuntos")
+    print("7. Ver conjuntos")
+    print("8. Salir")
 
 def imprimir_conjuntos(a,b):
-    print("Conjunto A: ")
+    print("\nConjunto A: ")
     print(a)
     print("Conjunto B: ")
     print(b)
 
 def ingresar_conjuntos():
-    print("Introduce los elementos de los conjuntos separados por espacios: ")
+    print("\n Introduce los elementos de los conjuntos separados por espacios: ")
     print("Ejemplo: 1 2 3 4 5")
     a = set(input("Elementos conjunto A: ").split())
     b = set(input("Elementos conjunto B: ").split())
@@ -74,6 +76,12 @@ def principal():
         elif opcion == "5":
             ver_menu()
         elif opcion == "6":
+            conjuntos = ingresar_conjuntos()
+            conjunto_a = conjuntos[0]
+            conjunto_b = conjuntos[1]
+        elif opcion == "7":
+            imprimir_conjuntos(conjunto_a,conjunto_b)
+        elif opcion == "8":
             break
         else:
             print("Opcion invalida. Intenta de nuevo.")
