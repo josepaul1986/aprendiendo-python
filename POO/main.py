@@ -1,0 +1,37 @@
+from player import Player
+
+# sorcerer = Player(15,25,"gnomo","hey ho! hey ho!")
+sorcerer = Player(15,25,"gnomo")
+print("\nEl gnomo tiene:")
+print(sorcerer.hit_points)
+print(sorcerer.mana)
+print(sorcerer.vocacion)
+print(sorcerer.lanzar_hechizo())
+
+sorcerer = Player(40,80,"sorcerer","wing guardium leviousa")
+print("\nEl Sorcerer tiene:")
+print(sorcerer.hit_points)
+print(sorcerer.mana)
+print(sorcerer.vocacion)
+print(sorcerer.lanzar_hechizo())
+
+knight = Player(80,20,"caballero","expelermus")
+print("\nEl Knight tiene:")
+print(knight.hit_points)
+print(knight.mana)
+print(knight.vocacion)
+print(knight.lanzar_hechizo())
+
+paladin = Player(100,40,"paladin","Expectro patronus")
+print("\nEl paladin tiene:")
+print(paladin.hit_points)
+print(paladin.mana)
+print(paladin.vocacion)
+print(paladin.lanzar_hechizo())
+
+druid = Player(60,100,"druida","exori")
+print("\nEl druid tiene:")
+print(druid.hit_points)
+print(druid.mana)
+print(druid.vocacion)
+print(druid.lanzar_hechizo())
