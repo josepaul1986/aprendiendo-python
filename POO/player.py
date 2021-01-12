@@ -1,10 +1,10 @@
 class Player:
 
-    def __init__(self, hit_points, mana, vocacion, hechizo="Puff"):
-        self.hit_points = hit_points
-        self.mana = mana
-        self.vocacion = vocacion
-        self.hechizo = hechizo
+    def __init__(self, **kwargs):
+        self.hit_points = kwargs.get("hit_points",50)
+        self.mana = kwargs.get("mana",50)
+        self.vocacion = kwargs.get("vocacion","gnomo")
+        self.hechizo = kwargs.get("hechizo","Puff!")
 
     def lanzar_hechizo(self):
         return self.hechizo
