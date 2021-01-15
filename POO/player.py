@@ -4,11 +4,14 @@ class Player:
     velocidad_movimiento = 50
 
     def __init__(self, **kwargs): #metodo constructor que recibe argumento multiple tipo diccionario
+        self.name = input("Escribe tu nombre de jugador: ")
         self.hit_points = kwargs.get("hit_points",50)
         self.mana = kwargs.get("mana",50)
 
-    def __str__(self): # metodo str sobreescrito para
-        return "\nEl jugador tiene vocacion {0} con {1} puntos de ataque. Puede lanzar el hechizo {2} y puede moverse a una velocidad {3}".format(self.vocacion, 
+    def __str__(self): # metodo str sobreescrito para devolver el string por defecto del objeto.
+        return "\nEl jugador con nombre {} tiene vocacion {} con {} puntos de ataque. Puede lanzar el hechizo {} y puede moverse a una velocidad {}".format(
+                                                                                                                                        self.name,
+                                                                                                                                        self.vocacion, 
                                                                                                                                         self.hit_points,
                                                                                                                                         self.lanzar_hechizo(), 
                                                                                                                                         self.velocidad_movimiento)
@@ -20,6 +23,9 @@ class Sorcerer(Player):
     vocacion="Sorcerer"
     hechizo = "Wing guardium leviousa!"
     velocidad_movimiento = 20
+
+    def lanzar_hechizo(self):
+        return "{} y Exura".format(self.hechizo)
 
 class Knight(Player):
     vocacion="Caballero"
@@ -35,3 +41,6 @@ class Druida(Player):
     vocacion="Druida"
     hechizo = "Exori!"
     velocidad_movimiento = 45
+
+    def lanzar_hechizo(self):
+        return "{} y Expelermus".format(self.hechizo)
