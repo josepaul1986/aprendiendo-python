@@ -36,5 +36,37 @@ def create_family_members():
     tommys_dog.name = "Bryan"
     tommys_dog.save()
 
+def get_family_members():
+    for person in Person.select():
+        print("Name: {} / Birthday: {}".format(person.name,person.bday))
+
+def get_family_member(identificador):
+    grandma_ana = Person.select().where(Person.id == identificador).get()
+    print("{}'s birthday is {}".format(grandma_ana.name,grandma_ana.bday))
+
+def get_any_member(identificador):
+    family_member = Person.get(Person.id == identificador)
+    print("{}'s birthday is {}".format(family_member.name,family_member.bday))
+
+def get_pets():
+    for pet in Pet.select():
+        print("Name: {} / Animal type: {}".format(pet.name,pet.animal_type))
+
+def delete_pets(name):
+    query = Pet.delete().where(Pet.name == name)
+    deleted_entries = query.execute()
+    print("{} deleted record(s)".format(deleted_entries))
+
+def delete_pet(name):
+    the_pet = Pet.get(Pet.name == name)
+    deleted_entry = the_pet.delete_instance()
+    print("{} deleted record(s)".format(deleted_entry))
+
 create_and_connect()
-create_family_members()
+## create_family_members()
+## get_family_members()
+## get_family_member(9)
+## get_any_member(8)
+
+delete_pet("Puffy")
+get_pets()
