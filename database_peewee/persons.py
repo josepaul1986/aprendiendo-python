@@ -63,10 +63,10 @@ def delete_pet(name):
     print("{} deleted record(s)".format(deleted_entry))
 
 create_and_connect()
-## create_family_members()
-## get_family_members()
+create_family_members()
+get_family_members()
 ## get_family_member(9)
 ## get_any_member(8)
 
-delete_pet("Puffy")
+#delete_pet("Puffy")
 get_pets()
