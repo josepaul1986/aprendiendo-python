@@ -1,14 +1,11 @@
+from re import search
+from time import strftime
 from typing import OrderedDict
 from peewee import *
 from datetime import *
+import sys
 
 db = SqliteDatabase('journal.db')
-
-menu_items = OrderedDict([
-    ('a','add entry'),
-    ('v','view entry'),
-    ('d','delete entry')
-])
 
 class Entry(Model):
     #content
@@ -26,15 +23,70 @@ def create_and_connect():
 
 def menu_loop():
     """ Show Menu """ ##Docstrings comentarios que seran accesibles desde los help docs desde python help.
+    choice = None
+    while choice != 'q':
+        print("\nPress 'q' to quit.")
+        for key,value in menu.items():
+            print("{}) {}".format(key,value.__doc__))
+        choice = input("Action: ").lower().strip()
+
+        if choice in menu:
+            menu[choice]()
 
 def add_entry():
     """ Add Entry """
+    print("Enter your thoughts. \n Press ctrl+D (new line and ctrl+Z on Windows) to finish.\n")
+    data = sys.stdin.read().strip()
 
-def view_entries():
+    if data:
+        if input("Do you want to save your entry? [y/n]").lower().strip() != 'n':
+            Entry.create(content=data)
+            print("You entry was saved successfully!")
+
+def view_entries(search_query=None):
     """ View all entries """
+    entries = Entry.select().order_by(Entry.timestamp.desc())
+
+    if search_query:
+        entries = entries.where(Entry.content.contains(search_query))
+
+    for entry in entries:
+        timestamp = entry.timestamp.strftime('%A %B %d, %Y %I:%M%p')
+        print("\n")
+        print(timestamp)
+        print('+'*len(timestamp))
+        print(entry.content)
+        print('+'*len(timestamp))
+        print("\n")
+        print("n) next entry")
+        print("d) delete entry")
+        print("r) return to menu")
+
+        next_action = input("Action [n/d/r]: ").lower().strip()
+
+        if next_action == 'r':
+            break
+        elif next_action == 'd':
+            delete_entry(entry)
+
+def search_entries():
+    """ Search entries """
+    search_query = input("Search query: ").strip()
+    view_entries(search_query)
 
 def delete_entry(entry):
-    """ Delete entry """
+    """ Delete an entry """
+    action = input("Are you sure? [y/n] ")
+
+    if action == 'y':
+        entry.delete_instance()
+        print("Entry was succesfully deleted!")
+
+menu = OrderedDict([
+    ('a',add_entry),
+    ('v',view_entries),
+    ('s',search_entries)
+])
 
 if __name__ == '__main__': ## Permite no ejecutar nada sin invocarlo previamente en el codigo al momento de importar.
     create_and_connect()
