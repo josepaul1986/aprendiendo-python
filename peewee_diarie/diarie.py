@@ -12,40 +12,46 @@ db = SqliteDatabase('journal.db')
 
 
 class Entry(Model):
-    #content
-    #timestamp
+    # content
+    # timestamp
     content = TextField()
     timestamp = DateTimeField(default=datetime.now())
 
     class Meta:
         database = db
 
+
 def create_and_connect():
     """ Connects to the database and creates the tables """
     db.connect()
-    db.create_tables([Entry],safe=True)
+    db.create_tables([Entry], safe=True)
+
 
 def menu_loop():
-    """ Show Menu """ ##Docstrings comentarios que seran accesibles desde los help docs desde python help.
+    """ Show Menu """  # Docstrings comentarios accesibles desde los help docs.
     choice = None
     while choice != 'q':
         print("\nPress 'q' to quit.")
-        for key,value in menu.items():
-            print("{}) {}".format(key,value.__doc__))
+        for key, value in menu.items():
+            print("{}) {}".format(key, value.__doc__))
         choice = input("Action: ").lower().strip()
 
         if choice in menu:
             menu[choice]()
 
+
 def add_entry():
     """ Add Entry """
-    print("Enter your thoughts. \n Press ctrl+D (new line and ctrl+Z on Windows) to finish.\n")
+    print("Enter your thoughts.")
+    print("\n Press ctrl+D (new line and ctrl+Z on Windows) to finish.\n")
     data = sys.stdin.read().strip()
 
     if data:
-        if input("Do you want to save your entry? [y/n]").lower().strip() != 'n':
+        ans = input("Do you want to save your entry?[y/n]")
+        if ans.lower().strip() != 'n':
             Entry.create(content=data)
             print("You entry was saved successfully!")
+
 
 def view_entries(search_query=None):
     """ View all entries """
@@ -73,10 +79,12 @@ def view_entries(search_query=None):
         elif next_action == 'd':
             delete_entry(entry)
 
+
 def search_entries():
     """ Search entries """
     search_query = input("Search query: ").strip()
     view_entries(search_query)
+
 
 def delete_entry(entry):
     """ Delete an entry """
@@ -87,11 +95,13 @@ def delete_entry(entry):
         print("Entry was succesfully deleted!")
 
 menu = OrderedDict([
-    ('a',add_entry),
-    ('v',view_entries),
-    ('s',search_entries)
+    ('a', add_entry),
+    ('v', view_entries),
+    ('s', search_entries)
 ])
 
-if __name__ == '__main__': ## Permite no ejecutar nada sin invocarlo previamente en el codigo al momento de importar.
+if __name__ == '__main__':
+    # Permite no ejecutar nada sin invocarlo previamente ...
+    # en el codigo al momento de importar.
     create_and_connect()
     menu_loop()
