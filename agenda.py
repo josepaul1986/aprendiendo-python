@@ -1,10 +1,11 @@
-#Agregar un contacto
-#Remover un contacto
-#Actualizar un contacto
-#Ver un contacto
-#Ver todos los contactos
+# Agregar un contacto
+# Remover un contacto
+# Actualizar un contacto
+# Ver un contacto
+# Ver todos los contactos
 
 agenda = dict()
+
 
 def agregar_contacto():
     nombre = input("Nombre del nuevo contacto: ")
@@ -12,15 +13,19 @@ def agregar_contacto():
     agenda[nombre] = numero
     input("\nOK: contacto agregado! Presione enter para continuar.")
 
+
 def remover_contacto():
     ver_contactos()
     nombre_busqueda = input("Nombre del contacto a que desea eliminar: ")
     try:
         del agenda[nombre_busqueda]
     except KeyError:
-        input("\nERROR: El nombre no fue encontrado. Presione enter para continuar")
+        print("\nERROR: El nombre no fue encontrado. ")
+        input("Presione enter para continuar")
     else:
-        input("\nOK: contacto removido! Presione enter para continuar.")
+        print("\nOK: contacto removido! ")
+        input("Presione enter para continuar.")
+
 
 def actualizar_contacto():
     ver_contactos()
@@ -29,25 +34,33 @@ def actualizar_contacto():
     agenda[nombre_busqueda] = numero_nuevo
     input("\nOK: contacto actualizado! Presione enter para continuar.")
 
+
 def ver_contacto():
     nombre_busqueda = input("Nombre del contacto a buscar: ")
     try:
-        print("\nDatos en agenda: {0} - {1}".format(nombre_busqueda, agenda[nombre_busqueda]))
+        print("\nDatos en agenda: {0} - {1}".format(
+                                                nombre_busqueda,
+                                                agenda[nombre_busqueda]))
     except KeyError:
-        input("\nERROR: El registro no fue encontrado. Presione enter para continuar.")
+        print("\nERROR: El registro no fue encontrado. ")
+        input("Presione enter para continuar.")
     else:
-        input("\nOK: contacto desplegado! Presione enter para continuar.")
+        print("\nOK: contacto desplegado! ")
+        input("Presione enter para continuar.")
+
 
 def ver_contactos():
     print("\nLista de contactos -> \n")
     i = 1
     if len(agenda) == 0:
-        input("\nNo tienes ningun contacto registrado. Presiona enter para continuar.")
+        print("\nNo tienes ningun contacto registrado. ")
+        input("Presiona enter para continuar.")
     else:
         for contacto in agenda:
             print(str(i) + ": " + contacto + " - " + agenda[contacto])
             i += 1
         input("\nPresione enter para continuar.")
+
 
 def principal():
     while True:
