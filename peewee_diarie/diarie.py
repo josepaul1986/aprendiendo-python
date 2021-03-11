@@ -1,11 +1,15 @@
 from re import search
 from time import strftime
 from typing import OrderedDict
-from peewee import *
 from datetime import *
+
 import sys
 
+from peewee import *
+
+
 db = SqliteDatabase('journal.db')
+
 
 class Entry(Model):
     #content
